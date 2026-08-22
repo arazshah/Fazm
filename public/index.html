@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="با چند جمله فاز این لحظه‌ات را پیدا کن و بدون توضیح اضافه با دیگران به اشتراک بگذار.">
+  <meta name="theme-color" content="#6d42dc">
+  <meta property="og:title" content="فازم — الان تو چه فازی هستی؟">
+  <meta property="og:description" content="حرفت را بزن، فازت را پیدا کن و تصویرش را با دیگران به اشتراک بگذار.">
+  <title>فازم — الان تو چه فازی‌ام؟</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="logo" href="/" aria-label="فازم"><img src="/logo.svg" alt=""><strong>فازم</strong><span>.</span></a>
+      <a class="creator" href="https://araz.me" target="_blank" rel="noopener noreferrer">ساختهٔ Araz Shahkarami</a>
+      <button id="newChat" class="ghost">گفت‌وگوی تازه</button>
+    </header>
+    <section class="intro" id="intro">
+      <p class="eyebrow">FAZM.IR</p>
+      <h1>الان تو چه <em>فازی</em> هستی؟</h1>
+      <p>لازم نیست اسم حس‌ات را بدانی. هرجوری هست تعریف کن؛ با هم پیدایش می‌کنیم.</p>
+      <button id="start" class="primary">بزن بریم <span>←</span></button>
+      <small>این ابزار جای روان‌شناس یا خدمات اورژانسی را نمی‌گیرد.</small>
+    </section>
+    <section class="workspace hidden" id="workspace">
+      <button id="historyToggle" class="history-toggle" type="button">رد فازها <b id="historyCount">۰</b></button>
+      <aside class="phase-card">
+        <div class="art-wrap"><img id="phaseArt" alt="تصویر انتزاعی فاز فعلی"><span id="phaseEmoji">◌</span></div>
+        <div class="share-block">
+          <span>اشتراک تصویر این فاز</span>
+          <div class="share"><input id="shareUrl" readonly aria-label="لینک عمومی فاز"><button id="copyLink">کپی</button></div>
+          <p class="privacy">فقط تصویر دیده می‌شود؛ حرف‌هایت خصوصی می‌ماند.</p>
+        </div>
+        <div class="phase-copy"><span>فازِ همین الان</span><h2 id="phaseLabel">هنوز داریم پیدایش می‌کنیم</h2><p id="confidence">با چند جمله واضح‌تر می‌شود</p></div>
+        <div class="meters"><label>شدت <i><b id="intensityBar"></b></i></label><label>انرژی <i><b id="energyBar"></b></i></label></div>
+        <section class="phase-insights" id="phaseInsights" aria-label="تحلیل فاز فعلی"></section>
+      </aside>
+      <section class="chat-panel">
+        <div class="messages" id="messages" aria-live="polite">
+          <article class="message assistant">اینجا لازم نیست مرتب و دقیق حرف بزنی. از همین لحظه بگو: بیشتر ذهنت شلوغ است، بدنت خسته است، یا یک اتفاق خاص تو را درگیر کرده؟</article>
+        </div>
+        <form id="chatForm"><textarea id="messageInput" maxlength="2000" rows="1" placeholder="هرجوری هست بنویس…" required></textarea><button type="submit" aria-label="ارسال">↑</button></form>
+        <p id="status" class="status"></p>
+      </section>
+      <section class="history-panel" id="historyPanel">
+        <div class="history-head"><div><span>ردِ فازها</span><h3>قبلاً چه حالی داشتی؟</h3></div><button id="historyClose" type="button" aria-label="بستن تاریخچه">×</button></div>
+        <div class="history-list" id="historyList"></div>
+        <p class="history-empty" id="historyEmpty">با اولین پاسخ، ردِ فازت اینجا ثبت می‌شود.</p>
+        <div class="return-card"><strong>بازگشت بدون ثبت‌نام</strong><p>روی همین مرورگر خودکار برمی‌گردی. برای روز مبادا، لینک خصوصی‌ات را برای خودت نگه دار.</p><button id="copyReturnLink" type="button">کپی لینک بازگشت خصوصی</button><small>این لینک را برای دیگران نفرست؛ به گفت‌وگو و تاریخچه‌ات دسترسی می‌دهد.</small></div>
+      </section>
+    </section>
+  </main>
+  <dialog id="newChatModal" class="confirm-modal">
+    <form method="dialog">
+      <span class="modal-icon">↻</span>
+      <h2>گفت‌وگوی تازه؟</h2>
+      <p>پیام‌های این گفت‌وگو از نمای فعلی کنار می‌روند، اما رد فازها، تصویرها و لینک ثابتت حفظ می‌شوند.</p>
+      <div><button value="cancel" class="modal-cancel">فعلاً نه</button><button value="confirm" id="confirmNewChat" class="modal-confirm">شروع تازه</button></div>
+    </form>
+  </dialog>
+  <dialog id="historyDetailModal" class="history-detail-modal">
+    <article>
+      <button id="historyDetailClose" class="detail-close" type="button" aria-label="بستن جزئیات">×</button>
+      <div class="detail-title"><img id="detailImage" alt="تصویر فاز انتخاب‌شده"><div><time id="detailTime"></time><h2 id="detailLabel"></h2></div></div>
+      <section><span>آن لحظه گفتی</span><p id="detailUserText"></p></section>
+      <section><span>برداشت فازم</span><p id="detailAnalysis"></p></section>
+      <div class="detail-insights" id="detailInsights"></div>
+      <section><span>پیشنهادهای همان لحظه</span><ol id="detailSuggestions"></ol></section>
+    </article>
+  </dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="/app.js"></script>
+</body>
+</html>
