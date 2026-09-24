@@ -31,7 +31,7 @@ function historyDetails(session, item) {
 
 const send = (res, status, body, type = "application/json; charset=utf-8", extraHeaders = {}) => {
   res.writeHead(status, { "Content-Type": type, "Cache-Control": "no-store", "X-Content-Type-Options": "nosniff", "Referrer-Policy": "no-referrer", ...extraHeaders });
-  res.end(type.startsWith("application/json") ? JSON.stringify(body) : body);
+  res.end(Buffer.isBuffer(body) ? body : type.startsWith("application/json") ? JSON.stringify(body) : body);
 };
 
 function applySecurityHeaders(req, res) {
@@ -182,6 +182,7 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "GET" && url.pathname === "/service-worker.js") return serveStatic(res, "service-worker.js", "text/javascript; charset=utf-8");
     const iconMatch = url.pathname.match(/^\/icons\/(icon-(?:192|512)(?:-maskable)?\.png)$/);
     if (req.method === "GET" && iconMatch) return serveStatic(res, `icons/${iconMatch[1]}`, "image/png");
+    if (req.method === "GET" && url.pathname === "/.well-known/assetlinks.json") return serveStatic(res, ".well-known/assetlinks.json", "application/json; charset=utf-8");
     if (req.method === "GET" && url.pathname === "/api/health") return send(res, 200, { ok: true, aiConfigured: Boolean(process.env.AVALAI_API_KEY) });
 
     if (req.method === "POST" && url.pathname === "/api/sessions") {

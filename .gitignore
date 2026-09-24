@@ -5,3 +5,12 @@ data/images/*
 node_modules/
 .DS_Store
 npm-debug.log*
+
+# Android/TWA: کلید امضا و خروجی build را هرگز کامیت نکن
+android/*.keystore
+android/*.jks
+android/*.apk
+android/*.aab
+android/.gradle/
+android/**/build/
+android/local.properties
