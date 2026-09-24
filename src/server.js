@@ -35,7 +35,7 @@ const send = (res, status, body, type = "application/json; charset=utf-8", extra
 };
 
 function applySecurityHeaders(req, res) {
-  res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
+  res.setHeader("Content-Security-Policy", "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; font-src 'self' https://cdn.jsdelivr.net; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; frame-ancestors 'none'; form-action 'self'");
   res.setHeader("X-Frame-Options", "DENY");
   res.setHeader("X-Permitted-Cross-Domain-Policies", "none");
   res.setHeader("Permissions-Policy", "camera=(), microphone=(), geolocation=(), payment=(), usb=()");
@@ -178,6 +178,10 @@ const server = http.createServer(async (req, res) => {
     if (req.method === "GET" && url.pathname === "/styles.css") return serveStatic(res, "styles.css", "text/css; charset=utf-8");
     if (req.method === "GET" && url.pathname === "/logo.svg") return serveStatic(res, "logo.svg", "image/svg+xml; charset=utf-8");
     if (req.method === "GET" && url.pathname === "/favicon.svg") return serveStatic(res, "favicon.svg", "image/svg+xml; charset=utf-8");
+    if (req.method === "GET" && url.pathname === "/manifest.json") return serveStatic(res, "manifest.json", "application/manifest+json; charset=utf-8");
+    if (req.method === "GET" && url.pathname === "/service-worker.js") return serveStatic(res, "service-worker.js", "text/javascript; charset=utf-8");
+    const iconMatch = url.pathname.match(/^\/icons\/(icon-(?:192|512)(?:-maskable)?\.png)$/);
+    if (req.method === "GET" && iconMatch) return serveStatic(res, `icons/${iconMatch[1]}`, "image/png");
     if (req.method === "GET" && url.pathname === "/api/health") return send(res, 200, { ok: true, aiConfigured: Boolean(process.env.AVALAI_API_KEY) });
 
     if (req.method === "POST" && url.pathname === "/api/sessions") {

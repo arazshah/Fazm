@@ -330,3 +330,9 @@ if (saved) {
   session = saved;
   api(`/api/sessions/${saved.id}`).then((restored) => { session = restored; showWorkspace(); render(); }).catch(() => localStorage.removeItem("fazm-session"));
 }
+
+if ("serviceWorker" in navigator) {
+  window.addEventListener("load", () => {
+    navigator.serviceWorker.register("/service-worker.js").catch(() => {});
+  });
+}
