@@ -1,8 +1,14 @@
 {
   "name": "fazm",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "description": "همراه کوتاه‌گفت‌وگو برای پیدا کردن نامِ حالِ فعلی — fazm.ir",
   "private": true,
+  "license": "UNLICENSED",
   "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/arazshah/Fazm.git"
+  },
   "scripts": {
     "dev": "node --env-file-if-exists=.env --watch src/server.js",
     "start": "node --env-file-if-exists=.env src/server.js",
