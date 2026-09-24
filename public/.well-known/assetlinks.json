@@ -1,0 +1,12 @@
+[
+  {
+    "relation": ["delegate_permission/common.handle_all_urls"],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "ir.fazm.twa",
+      "sha256_cert_fingerprints": [
+        "89:F4:0D:FD:97:39:B1:0E:B5:8D:DA:17:60:27:65:7B:97:A5:62:96:9A:3D:57:D6:F2:72:93:7A:36:0C:1C:F9"
+      ]
+    }
+  }
+]

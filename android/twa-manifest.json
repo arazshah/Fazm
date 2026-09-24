@@ -1,0 +1,40 @@
+{
+  "packageId": "ir.fazm.twa",
+  "host": "fazm.ir",
+  "name": "فازم",
+  "launcherName": "فازم",
+  "display": "standalone",
+  "themeColor": "#6d42dc",
+  "themeColorDark": "#6d42dc",
+  "navigationColor": "#17151c",
+  "navigationColorDark": "#17151c",
+  "navigationDividerColor": "#00000000",
+  "navigationDividerColorDark": "#00000000",
+  "backgroundColor": "#f6f2ea",
+  "enableNotifications": false,
+  "startUrl": "/",
+  "iconUrl": "https://fazm.ir/icons/icon-512.png",
+  "maskableIconUrl": "https://fazm.ir/icons/icon-512-maskable.png",
+  "splashScreenFadeOutDuration": 300,
+  "signingKey": {
+    "path": "./fazm-release.keystore",
+    "alias": "fazm"
+  },
+  "appVersionCode": 1,
+  "appVersion": "1.0.0",
+  "generatorApp": "bubblewrap-cli",
+  "webManifestUrl": "https://fazm.ir/manifest.json",
+  "fullScopeUrl": "https://fazm.ir/",
+  "fallbackType": "customtabs",
+  "enableSiteSettingsShortcut": true,
+  "isChromeOSOnly": false,
+  "isMetaQuest": false,
+  "orientation": "portrait",
+  "shortcuts": [],
+  "fingerprints": [
+    {
+      "name": "release",
+      "value": "89:F4:0D:FD:97:39:B1:0E:B5:8D:DA:17:60:27:65:7B:97:A5:62:96:9A:3D:57:D6:F2:72:93:7A:36:0C:1C:F9"
+    }
+  ]
+}
